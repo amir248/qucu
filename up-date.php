@@ -1,4 +1,9 @@
 <?php
+session_start(); // Запуск сессии
+if($_SESSION['user_id'] != 1){
+            header("Location: authorization.php"); // Перенаправление на защищенную страницу
+        exit;
+}
 include $_SERVER['DOCUMENT_ROOT']."/get/include.php";
 ?>
 
@@ -49,10 +54,13 @@ if(isset($_POST["id"])){
 }else{
     echo " ELSE";
 }
+if(isset($_POST["url"])){
+    $url = $_POST["url"];
+}
 // echo "Имя: $title <br> autor: $autor";
 echo $js;
 
-$sql = "UPDATE article SET title = '$title', description='$description', json='$json', autor='$autor', js='$js' WHERE id='$id'";
+$sql = "UPDATE article SET title = '$title', description='$description', json='$json', autor='$autor', js='$js',url='$url' WHERE id='$id'";
 // echo '<br> '. $id . " " . $title;
 if (mysqli_query($link, $sql)) {
     header("Refresh: 3; URL=/update.php"); 

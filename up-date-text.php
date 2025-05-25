@@ -1,4 +1,9 @@
 <?php
+session_start(); // Запуск сессии
+if($_SESSION['user_id'] != 1){
+            header("Location: authorization.php"); // Перенаправление на защищенную страницу
+        exit;
+}
 include $_SERVER['DOCUMENT_ROOT']."/get/include.php";
 
 ?>

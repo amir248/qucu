@@ -1,4 +1,6 @@
     <?php
+    session_start(); // Запуск сессии
+
     include $_SERVER['DOCUMENT_ROOT']."/get/include.php";
 
     $sql = "SELECT * FROM barbarians";
@@ -70,6 +72,8 @@
     if(<?= $aforementioned==true ?>){
         // console.log('true');
         document.querySelector("#infon").innerHTML='Неправильный логин или пароль!';
+    }else{
+        console.log('else authorization');
     }
 </script>
 </html>

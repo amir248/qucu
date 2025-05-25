@@ -1,4 +1,9 @@
 <?php
+session_start(); // Запуск сессии
+if($_SESSION['user_id'] != 1){
+            header("Location: authorization.php"); // Перенаправление на защищенную страницу
+        exit;
+}
 include $_SERVER['DOCUMENT_ROOT']."/get/include.php";
 // echo $_SERVER['DOCUMENT_ROOT'];
    $sql = "SELECT * FROM article WHERE id=".htmlspecialchars($_GET["id"]);
@@ -102,6 +107,7 @@ while ($row = mysqli_fetch_array($result)) {
     $article=$row["text"];
     $autor=$row['autor'];
     $js=$row['js'];
+    $url=$row['url'];
 }
 ?>
 <form action="/up-date.php" method="POST">
@@ -118,6 +124,9 @@ while ($row = mysqli_fetch_array($result)) {
     <input type="text" name="autor" value="<?= $autor ?>">
     <span>js</span>
     <textarea type="text" name="js"><?= $js ?></textarea>
+    <span>url</span>
+    <input type="text" name="url" value="<?= $url ?>">
+    
     <button type="submit">UPDATING</button>
 </form>
 <form action="/up-date-text.php" method="POST">
